@@ -11,6 +11,19 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class Constants {
+    public static MecanumConstants driveConstants = new MecanumConstants()
+            .maxPower(1)
+            .rightFrontMotorName("rightFront")
+            .rightRearMotorName("rightRear")
+            .leftRearMotorName("leftRear")
+            .leftFrontMotorName("leftFront")
+            .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .xVelocity(149.73580686162546)
+
+            .yVelocity(66.94365893831373);
         double robotMass = 9.07;
     public static DriveEncoderConstants localizerConstants = new DriveEncoderConstants()
             .rightFrontMotorName("rightFront")
@@ -29,17 +42,10 @@ public class Constants {
 
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(15);
-            public static MecanumConstants driveConstants = new MecanumConstants()
-                    .maxPower(1)
-                    .rightFrontMotorName("rightFront")
-                    .rightRearMotorName("rightRear")
-                    .leftRearMotorName("leftRear")
-                    .leftFrontMotorName("leftFront")
-                    .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
-                    .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
-                    .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
-                    .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD);
+            .forwardZeroPowerAcceleration(-40)
+            .lateralZeroPowerAcceleration(-59.7)
+            .mass(9.0);
+
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static Follower createFollower(HardwareMap hardwareMap) {

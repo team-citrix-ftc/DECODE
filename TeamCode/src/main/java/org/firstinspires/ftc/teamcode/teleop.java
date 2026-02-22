@@ -74,7 +74,7 @@ public class teleop extends OpMode {
      */
     final double LAUNCHER_TARGET_VELOCITY = 1500;
     final double LAUNCHER_MIN_VELOCITY = 1400;
-    final double INTAKE_TARGET_VELOCITY = 100;
+    final double INTAKE_TARGET_VELOCITY = 6767;
 
 
     // Declare OpMode members.
