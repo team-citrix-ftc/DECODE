@@ -91,6 +91,7 @@ public class teleop extends OpMode {
     private CRServo leftFeeder = null;
     private CRServo rightFeeder = null;
     private CRServo claw = null;
+    private boolean clawOpen = false;
     private DcMotor intake = null;
     private DcMotorEx intakeFlywheel = null;
     private int shotsFired = 0;
@@ -125,6 +126,8 @@ public class teleop extends OpMode {
     // Setup a variable for each drive wheel to save power level for telemetry
     double leftFrontPower;
     double rightFrontPower;
+    public enum StartingSide { RED, BLUE }
+    StartingSide side = StartingSide.RED;
     double leftBackPower;
     double rightBackPower;
 
@@ -208,6 +211,12 @@ public class teleop extends OpMode {
      */
     @Override
     public void init_loop() {
+            if (gamepad1.dpad_left) clawOpen = true;
+            if (gamepad1.dpad_right) clawOpen = false;
+
+
+            telemetry.addData("ClawOpen = ", clawOpen);
+            telemetry.update();
 
     }
 
@@ -278,8 +287,10 @@ public class teleop extends OpMode {
         }
         if (gamepad1.dpad_down){
             claw.setPower(FULL_SPEED);
+            clawOpen = true;
         } else if (gamepad1.dpad_right) {
             claw.setPower(STOP_SPEED);
+            clawOpen = false;
         }
 
         /*
@@ -303,6 +314,7 @@ public class teleop extends OpMode {
         telemetry.addData("Right Front Power", rightFrontPower);
         telemetry.addData("Left Back Power", leftBackPower);
         telemetry.addData("Right Back Power", rightBackPower);
+        telemetry.addData("Claw State", clawOpen ? "OPEN" : "CLOSED");
         telemetry.update();
 
     }
