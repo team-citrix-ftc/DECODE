@@ -268,7 +268,7 @@ public class teleop extends OpMode {
          * Here we give the user control of the speed of the launcher motor without automatically
          * queuing a shot.
          */
-        //hihihi
+        //hihihihi
         if (gamepad1.right_bumper) { // spin up flywheel
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
         } else if (gamepad1.b) { // stop flywheel
