@@ -90,6 +90,7 @@ public class teleop extends OpMode {
     private DcMotorEx launcher = null;
     private CRServo leftFeeder = null;
     private CRServo rightFeeder = null;
+    private CRServo claw = null;
     private DcMotor intake = null;
     private DcMotorEx intakeFlywheel = null;
     private int shotsFired = 0;
@@ -148,6 +149,7 @@ public class teleop extends OpMode {
         rightFeeder = hardwareMap.get(CRServo.class, "right_feeder");
         intake = hardwareMap.get(DcMotor.class, "intake");
         intakeFlywheel = hardwareMap.get(DcMotorEx.class, "wheelIntake");
+        claw = hardwareMap.get(CRServo.class, "claw");
 
         /*
          * To drive forward, most robots need the motor on one side to be reversed,
@@ -272,8 +274,14 @@ public class teleop extends OpMode {
         } else if (gamepad1.b) { // stop flywheel
             launcher.setVelocity(0);
         } else if (gamepad1.y) {
-            intakeFlywheel.setVelocity(INTAKE_TARGET_VELOCITY);
+            intakeFlywheel.setVelocity(120);
         }
+        if (gamepad1.dpad_down){
+            claw.setPower(FULL_SPEED);
+        } else if (gamepad1.dpad_right) {
+            claw.setPower(STOP_SPEED);
+        }
+
         /*
          * Now we call our "Launch" function.
          */
